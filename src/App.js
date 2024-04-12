@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import {getMusicData} from './api/recommendationApi'
 
 function App() {
+  console.log(getMusicData("Taylor Swift", "Red"));
   return (
     <div className="App">
       <header className="App-header">
