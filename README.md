@@ -1,2 +1,2 @@
-# SI568-spotify-project
-Code base for SI568 Project 2 
+# project-2-spotify
+Code Baseproject-2-spotify created by GitHub Classroom
