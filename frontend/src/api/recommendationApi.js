@@ -20,9 +20,25 @@ export const outputRecommendation = async (genre, emotion, weather) => {
     return finalRecommendations
 };
 
-const retryRecommendation = async(prompt) => {
+export const retryRecommendation = async(prompt) => {
     //The user does not like the recommendation and instead wants: {prompt}.  List the artist name and song title
-    return;
+    const res = await fetch('http://127.0.0.1:5000/recommendation/retry', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            prompt: prompt,
+        })
+    })
+    const recomendations = await res.json()
+    console.log(recomendations);
+    let finalRecommendations = []
+    for(const pair of recomendations){
+        const music = await getMusicData(pair[0], pair[1])
+        finalRecommendations = [...finalRecommendations, ...music]
+    }
+    return finalRecommendations
 };
 
 const getMusicData = async (artistName, songTitle) => {

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {getMusicData, outputRecommendation} from './api/recommendationApi'
+import {retryRecommendation, outputRecommendation} from './api/recommendationApi'
 import React, { useState, setState } from 'react';
 
 function App() {
@@ -35,6 +35,11 @@ function App() {
     //get reccomendation using genre, emotion, weather
     if(feedback === ""){
       const res = await outputRecommendation(genre, emotion, weather);
+      console.log(res)
+      setRecommendedSongs([...res])
+    }
+    else{
+      const res = await retryRecommendation(feedback)
       console.log(res)
       setRecommendedSongs([...res])
     }
