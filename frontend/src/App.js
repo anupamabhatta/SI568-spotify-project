@@ -4,7 +4,6 @@ import {retryRecommendation, outputRecommendation} from './api/recommendationApi
 import React, { useState, setState } from 'react';
 
 function App() {
-  //console.log(getMusicData("Taylor Swift", "Red"));
   const [showRecommendation, setShowRecommendation] = useState(false)
   const [showMusic, setShowMusic] = useState(true)
   const [showRecommendationFeedback, setShowRecommendationFeedback] = useState(false)
@@ -29,18 +28,14 @@ function App() {
   const getRecommendation = async (e) => {
     e.preventDefault();
     const { genre, emotion, weather, feedback } = formData
-    console.log("getting recommendation", feedback)
-    console.log(e)
 
     //get reccomendation using genre, emotion, weather
     if(feedback === ""){
       const res = await outputRecommendation(genre, emotion, weather);
-      console.log(res)
       setRecommendedSongs([...res])
     }
     else{
       const res = await retryRecommendation(feedback)
-      console.log(res)
       setRecommendedSongs([...res])
     }
     setFormData({
@@ -52,12 +47,11 @@ function App() {
   }
 
   const addToPlaylist = (songIndex) => {
-    console.log(songIndex)
     setPlaylist([...playlist, recommendedSongs[songIndex]])
 
     //added song should be removed from recommended display
     const updatedRecommendation = recommendedSongs.filter((item, index) => index !== songIndex);
-    console.log(updatedRecommendation)
+
     setRecommendedSongs([...updatedRecommendation])
 
     //maybe add to local storage
@@ -82,12 +76,10 @@ function App() {
 
         <div className = "playlist-top">
           <div className = "playlist-image">
-            <h2>Image</h2>
           </div>
           <div className = "playlist-metadata">
             <h2>Playlist</h2>
             <p>Number of Songs: {playlist.length}</p>
-            <p>Description</p>
             <div className = "playlist-metadata-buttons">
               <button onClick = {() => changeView(false)}>Get song recommendation</button>
             </div>

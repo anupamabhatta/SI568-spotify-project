@@ -11,7 +11,6 @@ export const outputRecommendation = async (genre, emotion, weather) => {
         })
     })
     const recomendations = await res.json()
-    console.log(recomendations);
     let finalRecommendations = []
     for(const pair of recomendations){
         const music = await getMusicData(pair[0], pair[1])
@@ -32,7 +31,6 @@ export const retryRecommendation = async(prompt) => {
         })
     })
     const recomendations = await res.json()
-    console.log(recomendations);
     let finalRecommendations = []
     for(const pair of recomendations){
         const music = await getMusicData(pair[0], pair[1])
